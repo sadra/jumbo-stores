@@ -1,4 +1,4 @@
 export interface GetStoresInput {
-  latitude: String;
-  longitude: String;
+  latitude: string;
+  longitude: string;
 }

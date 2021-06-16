@@ -1,3 +1,5 @@
+import { UserInputError } from 'apollo-server-express';
+import { isGeographicalParam } from '../common/geographical';
 import { GetStoresInput } from '../inputs';
 
 const stores = [
@@ -77,6 +79,17 @@ export = {
     return stores;
   },
   closestStores: (_: any, getStoreInput: GetStoresInput) => {
+    if (
+      !isGeographicalParam(getStoreInput.latitude) ||
+      !isGeographicalParam(getStoreInput.longitude)
+    ) {
+      throw new UserInputError(
+        'Latitude or Longtitude format is wrong. e.g. 22.12345678',
+        {
+          getStoreInput,
+        },
+      );
+    }
     return stores;
   },
 };
