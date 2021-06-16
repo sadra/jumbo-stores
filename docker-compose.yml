@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  web:
+    build: .
+    ports:
+      - ${PORT}:8000
+    environment:
+      - PORT=${PORT}
+      - MONGO_URL=${MONGO_URL}
