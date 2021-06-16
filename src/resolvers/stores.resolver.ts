@@ -1,3 +1,5 @@
+import { GetStoresInput } from '../inputs';
+
 const stores = [
   {
     city: 'Bladel',
@@ -72,6 +74,9 @@ const stores = [
 
 export = {
   stores: () => {
+    return stores;
+  },
+  closestStores: (_: any, getStoreInput: GetStoresInput) => {
     return stores;
   },
 };

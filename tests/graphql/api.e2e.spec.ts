@@ -26,4 +26,29 @@ describe('GraphQl e2e test', () => {
           ]),
         }),
       ));
+
+  it('/graphql (QUERY) closest stores', () =>
+    request(app)
+      .post('/graphql')
+      .send({
+        query: `
+        {
+          closestStores(latitude: "33.233445", longitude: "55.122334") {
+            city
+            uuid
+          }
+        }
+      `,
+      })
+      .expect(200)
+      .expect(({ body }) =>
+        expect(body.data).toMatchObject({
+          closestStores: expect.arrayContaining([
+            expect.objectContaining({
+              city: expect.any(String),
+              uuid: expect.any(String),
+            }),
+          ]),
+        }),
+      ));
 });

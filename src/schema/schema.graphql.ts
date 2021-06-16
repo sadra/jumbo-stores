@@ -21,5 +21,6 @@ export const schema = gql`
 
   type Query {
     stores: [Store]!
+    closestStores(latitude: String!, longitude: String!): [Store]!
   }
 `;
