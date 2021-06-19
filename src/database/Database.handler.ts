@@ -1,3 +1,4 @@
+import { initialData } from './initializer/Database.initializer';
 import { ConnectionOptions, connect, connection, disconnect } from 'mongoose';
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ export const connectDB = async () => {
     };
 
     await connect(getDBUri()!!, options);
+    await initialData();
 
     if (process.env.NODE_ENV !== 'test')
       console.log('📦 [mongo]: MongoDB is connected.');
