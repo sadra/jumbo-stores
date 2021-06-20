@@ -8,6 +8,8 @@ export const app = express();
 const server = new ApolloServer({
   schema,
   playground: true,
+  introspection: true,
+  tracing: process.env.NODE_ENV === 'production' ? false : true,
 });
 
 app.use(cors());
