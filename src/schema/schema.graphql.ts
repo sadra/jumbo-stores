@@ -22,8 +22,16 @@ export const schema = gql`
     todayClose: String!
   }
 
+  type SearchStore {
+    stores: [Store]!
+    total: Int!
+    pages: Int!
+    page: Int!
+    limit: Int!
+  }
+
   type Query {
-    stores(offset: Int, limit: Int, city: String): [Store]!
+    stores(page: Int, limit: Int, city: String): SearchStore!
     closestStores(latitude: String!, longitude: String!, limit: Int): [Store]!
   }
 `;

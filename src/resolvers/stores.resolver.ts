@@ -19,6 +19,10 @@ export class SotresResolver {
   }
 
   private async stores(_: void, searchInput: SearchStoresInput) {
+    if (searchInput.page != null && searchInput.page < 1) {
+      throw new UserInputError('Page value must be greater than zero. e.g. 1');
+    }
+
     const result = await this.storeRepository.getStores(searchInput);
 
     return result;
