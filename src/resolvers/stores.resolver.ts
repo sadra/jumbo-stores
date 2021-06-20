@@ -27,7 +27,10 @@ export class SotresResolver {
   ): Promise<Store[]> {
     this.checkIfGeoIsCorrect(getStoreInput);
 
-    const result = await this.storeRepository.getStores(getStoreInput);
+    const result = await this.storeRepository.getStores(
+      getStoreInput,
+      getStoreInput.limit,
+    );
 
     return result;
   }
