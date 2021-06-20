@@ -1,5 +1,5 @@
 export interface SearchStoresInput {
-  offset?: number;
+  page?: number;
   limit?: number;
   city?: string;
 }
