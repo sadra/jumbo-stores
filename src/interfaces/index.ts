@@ -1,1 +1,1 @@
-export { IResolver } from './resolver.interface';
+export { IResolver } from './Resolver.interface';

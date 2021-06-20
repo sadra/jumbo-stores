@@ -1,6 +1,8 @@
+'use strict';
 import { UserInputError } from 'apollo-server-express';
 import { isGeographicalParam } from '../common/geographical';
 import { GetStoresInput } from '../inputs';
+import { IResolver } from '../interfaces';
 
 const stores = [
   {
@@ -74,11 +76,30 @@ const stores = [
   },
 ];
 
-export = {
-  stores: () => {
+export class SotresResolver implements IResolver {
+  constructor() {
+    this.stores = this.stores.bind(this);
+    this.closestStores = this.closestStores.bind(this);
+  }
+
+  resolvers(): object {
+    return {
+      stores: this.stores,
+      closestStores: this.closestStores,
+    };
+  }
+
+  private stores() {
     return stores;
-  },
-  closestStores: (_: any, getStoreInput: GetStoresInput) => {
+  }
+
+  private closestStores(_: any, getStoreInput: GetStoresInput) {
+    this.checkIfGeoIsCorrect(getStoreInput);
+
+    return stores;
+  }
+
+  private checkIfGeoIsCorrect(getStoreInput: GetStoresInput) {
     if (
       !isGeographicalParam(getStoreInput.latitude) ||
       !isGeographicalParam(getStoreInput.longitude)
@@ -90,6 +111,5 @@ export = {
         },
       );
     }
-    return stores;
-  },
-};
+  }
+}

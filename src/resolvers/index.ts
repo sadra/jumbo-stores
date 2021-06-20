@@ -1,9 +1,11 @@
 import { IResolvers } from 'graphql-tools';
-import storesResolver from './stores.resolver';
+import { SotresResolver } from './stores.resolver';
+
+const sotresResolver = new SotresResolver();
 
 const resolvers: IResolvers = {
   Query: {
-    ...storesResolver,
+    ...sotresResolver.resolvers(),
   },
 };
 
