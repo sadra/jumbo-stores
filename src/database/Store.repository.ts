@@ -6,10 +6,19 @@ export class StoreRepository {
   async getStores(searchInput: SearchStoresInput): Promise<Store[]> {
     const { limit = 10, offset = 0 } = searchInput;
 
-    const stores = await StoreModel.aggregate([
-      { $skip: limit * offset },
-      { $limit: limit },
-    ]);
+    let query = [];
+
+    if (searchInput.city) {
+      query.push({
+        $match: {
+          city: searchInput.city,
+        },
+      });
+    }
+
+    query.push({ $skip: limit * offset }, { $limit: limit });
+
+    const stores = await StoreModel.aggregate(query);
 
     return stores;
   }
