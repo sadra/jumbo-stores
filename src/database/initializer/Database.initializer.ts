@@ -1,11 +1,11 @@
 import { Store, StoreModel } from '../Store.model';
 import * as fs from 'fs';
-import { Types } from 'mongoose';
 
 export const initialData = async () => {
   isAnyStoreData()
     .then((dataIsExist) => {
       if (!dataIsExist) maniuplateData();
+      if (dataIsExist) queryFiveNeat();
     })
     .catch((error) => {
       console.error(`❗️[mongo-error] initialData: ${error}`);
@@ -17,7 +17,9 @@ async function isAnyStoreData(): Promise<boolean> {
   return result.length > 0;
 }
 
-async function maniuplateData() {
+function queryFiveNeat() {}
+
+function maniuplateData() {
   console.log(`🚦 [mongo]: Seeding started.`);
 
   getSeedData()
@@ -38,6 +40,10 @@ async function getSeedData(): Promise<Store[]> {
       new StoreModel({
         ...store,
         _id: store['uuid'],
+        location: {
+          type: 'Point',
+          coordinates: [store['latitude'], store['longitude']],
+        },
       }),
   );
 }
