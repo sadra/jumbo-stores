@@ -1,7 +1,8 @@
+import { SearchStoresInput } from '../inputs/SearchStores.input';
 import { StoreRepository } from './../database/Store.repository';
 import { UserInputError } from 'apollo-server-express';
 import { isGeographicalParam } from '../common/geographical';
-import { GetStoresInput } from '../inputs';
+import { GetClosestStoresInput } from '../inputs';
 import { Store } from '../database/Store.model';
 
 export class SotresResolver {
@@ -17,17 +18,23 @@ export class SotresResolver {
     };
   }
 
-  private stores() {
-    return [];
+  private async stores(_: void, searchInput: SearchStoresInput) {
+    if (searchInput.page != null && searchInput.page < 1) {
+      throw new UserInputError('Page value must be greater than zero. e.g. 1');
+    }
+
+    const result = await this.storeRepository.getStores(searchInput);
+
+    return result;
   }
 
   private async closestStores(
     _: void,
-    getStoreInput: GetStoresInput,
+    getStoreInput: GetClosestStoresInput,
   ): Promise<Store[]> {
     this.checkIfGeoIsCorrect(getStoreInput);
 
-    const result = await this.storeRepository.getStores(
+    const result = await this.storeRepository.getClosestStores(
       getStoreInput,
       getStoreInput.limit,
     );
@@ -35,7 +42,7 @@ export class SotresResolver {
     return result;
   }
 
-  private checkIfGeoIsCorrect(getStoreInput: GetStoresInput) {
+  private checkIfGeoIsCorrect(getStoreInput: GetClosestStoresInput) {
     if (
       !isGeographicalParam(getStoreInput.latitude) ||
       !isGeographicalParam(getStoreInput.longitude)

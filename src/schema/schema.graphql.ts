@@ -13,8 +13,6 @@ export const schema = gql`
     street2: String!
     street3: String!
     addressName: String!
-    longitude: String!
-    latitude: String!
     location: Location!
     complexNumber: String!
     showWarningMessage: Boolean!
@@ -24,8 +22,16 @@ export const schema = gql`
     todayClose: String!
   }
 
-  type Query {
+  type SearchStore {
     stores: [Store]!
+    total: Int!
+    pages: Int!
+    page: Int!
+    limit: Int!
+  }
+
+  type Query {
+    stores(page: Int, limit: Int, city: String): SearchStore!
     closestStores(latitude: String!, longitude: String!, limit: Int): [Store]!
   }
 `;
