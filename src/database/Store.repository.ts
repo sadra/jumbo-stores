@@ -1,5 +1,5 @@
 import { SearchStoresInput } from '../inputs/SearchStores.input';
-import { GetStoresInput } from '../inputs';
+import { GetClosestStoresInput } from '../inputs';
 import { Store, StoreModel } from './Store.model';
 import { SearchStoresDto } from '../dto/SearchStores.dto';
 
@@ -34,7 +34,7 @@ export class StoreRepository {
   }
 
   async getClosestStores(
-    credentials: GetStoresInput,
+    credentials: GetClosestStoresInput,
     limit: number = 5,
   ): Promise<Store[]> {
     const stores = await StoreModel.find({

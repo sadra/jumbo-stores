@@ -2,7 +2,7 @@ import { SearchStoresInput } from '../inputs/SearchStores.input';
 import { StoreRepository } from './../database/Store.repository';
 import { UserInputError } from 'apollo-server-express';
 import { isGeographicalParam } from '../common/geographical';
-import { GetStoresInput } from '../inputs';
+import { GetClosestStoresInput } from '../inputs';
 import { Store } from '../database/Store.model';
 
 export class SotresResolver {
@@ -30,7 +30,7 @@ export class SotresResolver {
 
   private async closestStores(
     _: void,
-    getStoreInput: GetStoresInput,
+    getStoreInput: GetClosestStoresInput,
   ): Promise<Store[]> {
     this.checkIfGeoIsCorrect(getStoreInput);
 
@@ -42,7 +42,7 @@ export class SotresResolver {
     return result;
   }
 
-  private checkIfGeoIsCorrect(getStoreInput: GetStoresInput) {
+  private checkIfGeoIsCorrect(getStoreInput: GetClosestStoresInput) {
     if (
       !isGeographicalParam(getStoreInput.latitude) ||
       !isGeographicalParam(getStoreInput.longitude)
