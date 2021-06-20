@@ -1,6 +1,10 @@
 const { gql } = require('apollo-server');
 
 export const schema = gql`
+  type Location {
+    coordinates: [Float]!
+  }
+
   type Store {
     uuid: String!
     city: String!
@@ -11,6 +15,7 @@ export const schema = gql`
     addressName: String!
     longitude: String!
     latitude: String!
+    location: Location!
     complexNumber: String!
     showWarningMessage: Boolean!
     todayOpen: String!
@@ -21,6 +26,6 @@ export const schema = gql`
 
   type Query {
     stores: [Store]!
-    closestStores(latitude: String!, longitude: String!): [Store]!
+    closestStores(latitude: String!, longitude: String!, limit: Int): [Store]!
   }
 `;
