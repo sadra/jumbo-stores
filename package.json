@@ -1,8 +1,8 @@
 {
   "name": "jumbo-stores",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is Jumbo's Assignement Project",
+  "main": "dist/bin/server.js",
   "engines": {
     "node": "15.x"
   },
@@ -15,8 +15,20 @@
     "test": "ENV=test jest",
     "test:watch": "ENV=test jest --watch"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "express",
+    "GrahQL",
+    "Apollo",
+    "Mongo",
+    "TypeScript",
+    "heroku"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sadra/jumbo-stores"
+  },
+  "author": "Sadra Isapanah Amlashi",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.11",
