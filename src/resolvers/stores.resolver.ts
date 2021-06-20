@@ -1,11 +1,11 @@
-'use strict';
+import { StoreRepository } from './../database/Store.repository';
 import { UserInputError } from 'apollo-server-express';
 import { isGeographicalParam } from '../common/geographical';
 import { GetStoresInput } from '../inputs';
-import { IResolver } from '../interfaces';
+import { Store } from '../database/Store.model';
 
-export class SotresResolver implements IResolver {
-  constructor() {
+export class SotresResolver {
+  constructor(private storeRepository: StoreRepository) {
     this.stores = this.stores.bind(this);
     this.closestStores = this.closestStores.bind(this);
   }
@@ -21,10 +21,15 @@ export class SotresResolver implements IResolver {
     return [];
   }
 
-  private closestStores(_: any, getStoreInput: GetStoresInput) {
+  private async closestStores(
+    _: void,
+    getStoreInput: GetStoresInput,
+  ): Promise<Store[]> {
     this.checkIfGeoIsCorrect(getStoreInput);
 
-    return [];
+    const result = await this.storeRepository.getStores(getStoreInput);
+
+    return result;
   }
 
   private checkIfGeoIsCorrect(getStoreInput: GetStoresInput) {
