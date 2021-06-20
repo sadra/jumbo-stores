@@ -1,6 +1,6 @@
 {
   "name": "jumbo-stores",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This is Jumbo's Assignement Project",
   "main": "dist/bin/server.js",
   "engines": {
