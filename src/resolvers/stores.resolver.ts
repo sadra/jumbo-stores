@@ -1,3 +1,4 @@
+import { SearchStoresInput } from '../inputs/SearchStores.input';
 import { StoreRepository } from './../database/Store.repository';
 import { UserInputError } from 'apollo-server-express';
 import { isGeographicalParam } from '../common/geographical';
@@ -17,8 +18,10 @@ export class SotresResolver {
     };
   }
 
-  private stores() {
-    return [];
+  private async stores(_: void, searchInput: SearchStoresInput) {
+    const result = await this.storeRepository.getStores(searchInput);
+
+    return result;
   }
 
   private async closestStores(
@@ -27,7 +30,7 @@ export class SotresResolver {
   ): Promise<Store[]> {
     this.checkIfGeoIsCorrect(getStoreInput);
 
-    const result = await this.storeRepository.getStores(
+    const result = await this.storeRepository.getClosestStores(
       getStoreInput,
       getStoreInput.limit,
     );
