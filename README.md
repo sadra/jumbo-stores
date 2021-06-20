@@ -2,7 +2,9 @@
 
 [![Heroku](https://heroku-badge.herokuapp.com/?app=jumbo-stores-sadra)](https://jumbo-stores-sadra.herokuapp.com/)
 
-This a Node.js project, developed by Typescript.
+This a Node.js project, developed by Typescript and deployed on Heroku.
+
+Demo version: [Root](https://jumbo-stores-sadra.herokuapp.com), [GraphQL](https://jumbo-stores-sadra.herokuapp.com/graphql)
 
 - [Jumbo Store Code Assignement](#jumbo-store-code-assignement)
   - [How to Run](#how-to-run)
