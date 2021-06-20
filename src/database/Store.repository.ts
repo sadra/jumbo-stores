@@ -2,7 +2,7 @@ import { GetStoresInput } from '../inputs';
 import { Store, StoreModel } from './Store.model';
 
 export class StoreRepository {
-  async getStores(
+  async getClosestStores(
     credentials: GetStoresInput,
     limit: number = 5,
   ): Promise<Store[]> {
