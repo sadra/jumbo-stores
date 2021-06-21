@@ -7,16 +7,18 @@ This a Node.js project, developed by Typescript and deployed on Heroku.
 Demo version: [Root](https://jumbo-stores-sadra.herokuapp.com), [GraphQL](https://jumbo-stores-sadra.herokuapp.com/graphql)
 
 - [Jumbo Store Code Assignement](#jumbo-store-code-assignement)
-  - [How to Run](#how-to-run)
-  - [How to Run With Docker](#how-to-run-with-docker)
+  - [How to Run (Locally)](#how-to-run-locally)
+  - [How to Run (with Docker)](#how-to-run-with-docker)
   - [Run Test](#run-test)
   - [API](#api)
     - [Test /](#test-)
-  - [GraphQl](#graphql)
+  - [GraphQL](#graphql)
     - [Search on Stores](#search-on-stores)
     - [Get Closest Stores](#get-closest-stores)
 
-## How to Run
+## How to Run (Locally)
+
+0. Create a mongo database on a cloud service like [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or anywhere you like.
 
 1. Just copy `.env.example` to `.env` and fill with your einviorements:
 
@@ -25,7 +27,7 @@ PORT=8000
 MONGO_URL=mongodb+srv://USERNAME:PASSWORD@DB_URL/DB_NAME?retryWrites=true&w=majority
 ```
 
-1. Install npm packages:
+2. Install npm packages:
 
 ```bash
 npm install
@@ -43,19 +45,25 @@ npm run start:dev
 npm run start:rod
 ```
 
-## How to Run With Docker
+## How to Run (with Docker)
 
 If you like to run the project with Docker, just run `docker-compose` with envs:
 
 ```bash
-PORT=8000 MONGO_URL='mongodb+srv://test:test@example.mongodb.net/test?retryWrites=true' docker-compose up -d
+docker-compose up --build
+```
+
+If you have any db on the cloud you can run with your desire mongoDB URL
+
+```bash
+MONGO_URL='mongodb+srv://test:test@example.mongodb.net/test?retryWrites=true' docker-compose up --build
 ```
 
 ## Run Test
 
-This tests uses `mongodb-memory-server` as a MongoDb Driver.
+This tests uses `mongodb-memory-server` as a MongoDb Driver. for tests I used **Jest**, and **supertest** for the `e2e`.
 
-1. To run all the tests:
+To run all the tests:
 
 ```bash
 npm test
@@ -81,7 +89,7 @@ Status: `200`
 "Hi! I am Jumbo :)"
 ```
 
-## GraphQl
+## GraphQL
 
 You can access to the graphql api throw the following route:
 
