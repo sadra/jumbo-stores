@@ -25,7 +25,7 @@ export class StoreRepository {
     const pages = Math.ceil(total / limit);
 
     return {
-      stores,
+      list: stores,
       total,
       pages,
       page,

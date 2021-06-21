@@ -116,7 +116,7 @@ _Request Example:_
 ```graphql
 query {
   stores(page: 1, limit: 2, city: "Zeist") {
-    stores {
+    list {
       city
       addressName
       postalCode
@@ -140,7 +140,7 @@ _Response Example:_
 {
   "data": {
     "stores": {
-      "stores": [
+      "list": [
         {
           "city": "Zeist",
           "addressName": "Jumbo Zeist Johan van Oldenbarneveltlaan",

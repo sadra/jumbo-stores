@@ -16,7 +16,7 @@ describe('GraphQl e2e test', () => {
         query: `
         query {
           stores {
-            stores {
+            list {
               city
               postalCode
             }
@@ -32,7 +32,7 @@ describe('GraphQl e2e test', () => {
       .expect(({ body }) =>
         expect(body.data).toMatchObject({
           stores: expect.objectContaining({
-            stores: expect.arrayContaining([
+            list: expect.arrayContaining([
               expect.objectContaining({
                 city: expect.any(String),
                 postalCode: expect.any(String),

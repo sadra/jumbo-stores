@@ -23,7 +23,7 @@ export const schema = gql`
   }
 
   type SearchStore {
-    stores: [Store]!
+    list: [Store]!
     total: Int!
     pages: Int!
     page: Int!
