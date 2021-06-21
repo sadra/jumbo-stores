@@ -1,4 +1,4 @@
-import { Store, StoreModel } from '../Store.model';
+import { Store, StoreModel } from './Store.model';
 import * as fs from 'fs';
 
 export const initialData = async () => {
@@ -33,7 +33,10 @@ function maniuplateData() {
 }
 
 async function getSeedData(): Promise<Store[]> {
-  let rawdata = await fs.readFileSync(__dirname + '/seed.data.json', 'utf8');
+  let rawdata = await fs.readFileSync(
+    __dirname + '/../../seed.data.json',
+    'utf8',
+  );
   let data = JSON.parse(rawdata);
   return data.stores.map(
     (store: any) =>
