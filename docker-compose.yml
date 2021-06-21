@@ -1,10 +1,32 @@
-version: '3.3'
+version: '3.8'
 
 services:
-  web:
+  jumbo-api:
+    container_name: jumbo-api
     build: .
     ports:
-      - ${PORT}:8000
+      - 8000:8000
     environment:
-      - PORT=${PORT}
-      - MONGO_URL=${MONGO_URL}
+      - PORT=8000
+      - MONGO_URL=mongodb://jumbo-db/jumbo
+    networks:
+      - jumboconnect
+    depends_on:
+      - jumbo-db
+    links:
+      - jumbo-db
+    restart: unless-stopped
+  jumbo-db:
+    container_name: jumbo-db
+    image: mongo
+    networks:
+      - jumboconnect
+    ports:
+      - 27017:27017
+    volumes:
+      - jumbo-db-vol:/data/db
+
+networks:
+  jumboconnect:
+volumes:
+  jumbo-db-vol:
