@@ -1,29 +1,48 @@
+import { dbRunner } from './../utils/db.runner';
 import request from 'supertest';
 import { app } from '../../src/bin/app';
 
 describe('GraphQl e2e test', () => {
+  dbRunner();
+
+  it('should be defiend', () => {
+    expect(app).toBeDefined();
+  });
+
   it('/graphql (QUERY) stores', () =>
     request(app)
       .post('/graphql')
       .send({
         query: `
-      {
-        stores {
-          city
-          uuid
+        query {
+          stores {
+            list {
+              city
+              postalCode
+            }
+            total
+            pages
+            page
+            limit
+          }
         }
-      }
     `,
       })
       .expect(200)
       .expect(({ body }) =>
         expect(body.data).toMatchObject({
-          stores: expect.arrayContaining([
-            expect.objectContaining({
-              city: expect.any(String),
-              uuid: expect.any(String),
-            }),
-          ]),
+          stores: expect.objectContaining({
+            list: expect.arrayContaining([
+              expect.objectContaining({
+                city: expect.any(String),
+                postalCode: expect.any(String),
+              }),
+            ]),
+            total: expect.any(Number),
+            pages: expect.any(Number),
+            page: expect.any(Number),
+            limit: expect.any(Number),
+          }),
         }),
       ));
 
@@ -33,9 +52,9 @@ describe('GraphQl e2e test', () => {
       .send({
         query: `
         {
-          closestStores(latitude: "33.233445", longitude: "55.122334") {
+          closestStores(latitude: "52.081909", longitude: "5.4129834") {
             city
-            uuid
+            postalCode
           }
         }
       `,
@@ -46,7 +65,7 @@ describe('GraphQl e2e test', () => {
           closestStores: expect.arrayContaining([
             expect.objectContaining({
               city: expect.any(String),
-              uuid: expect.any(String),
+              postalCode: expect.any(String),
             }),
           ]),
         }),

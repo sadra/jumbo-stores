@@ -15,3 +15,7 @@ const server = new ApolloServer({
 app.use(cors());
 
 server.applyMiddleware({ app, path: '/graphql' });
+
+app.use('/', (req, res) => {
+  res.send('Hi! I am Jumbo :)');
+});

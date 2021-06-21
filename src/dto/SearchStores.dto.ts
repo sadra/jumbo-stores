@@ -1,7 +1,7 @@
 import { Store } from '../database/Store.model';
 
 export interface SearchStoresDto {
-  stores: Store[];
+  list: Store[];
   total: number;
   pages: number;
   page: number;

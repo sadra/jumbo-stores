@@ -23,7 +23,7 @@ export const schema = gql`
   }
 
   type SearchStore {
-    stores: [Store]!
+    list: [Store]!
     total: Int!
     pages: Int!
     page: Int!
@@ -31,7 +31,54 @@ export const schema = gql`
   }
 
   type Query {
-    stores(page: Int, limit: Int, city: String): SearchStore!
-    closestStores(latitude: String!, longitude: String!, limit: Int): [Store]!
+    """
+    # Stores
+    Search in the stores
+    """
+    stores(
+      """
+      **Optional**
+
+      **default: 1**
+
+      Page value must be bigger than **1**.
+      """
+      page: Int
+
+      """
+      **Optional**
+
+      **default: 10**
+      """
+      limit: Int
+
+      """
+      **Optional**
+      """
+      city: String
+    ): SearchStore!
+
+    """
+    # Closest Stores
+    You find the closest store to you with this api
+    """
+    closestStores(
+      """
+      **Mandatory**
+      """
+      latitude: String!
+
+      """
+      **Mandatory**
+      """
+      longitude: String!
+
+      """
+      **Optional**
+
+      **default: 5**
+      """
+      limit: Int
+    ): [Store]!
   }
 `;

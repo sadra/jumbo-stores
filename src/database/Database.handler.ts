@@ -1,4 +1,4 @@
-import { initialData } from './initializer/Database.initializer';
+import { initialData } from './Database.initializer';
 import { ConnectionOptions, connect, connection, disconnect } from 'mongoose';
 require('dotenv').config();
 
