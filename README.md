@@ -1,6 +1,6 @@
 # Jumbo Store Code Assignement
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=jumbo-stores-sadra)](https://jumbo-stores-sadra.herokuapp.com/)
+[![Heroku](https://heroku-badge.herokuapp.com?app=jumbo-stores-sadra)](https://jumbo-stores-sadra.herokuapp.com/)
 
 This a Node.js project, developed by Typescript and deployed on Heroku.
 
@@ -71,9 +71,9 @@ npm test
 
 ## API
 
-Base Route: `https://localhost:PORT`
+Base Route: `http://localhost:PORT`
 
-GraphQL Route: `https://localhost:PORT/graphql`
+GraphQL Route: `http://localhost:PORT/graphql`
 
 ### Test /
 
